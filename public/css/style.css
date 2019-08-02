@@ -1,7 +1,36 @@
 th{
-    width: 130px;;
+    width: 1000px;
+}
+td{
+    width: 300px;
+    height: 30px;
+    height: 50px;
+  vertical-align: bottom;
 }
 .avg{
     
-    transform: translate(600px,20px);
+    transform: translate(50px,20px);
 }
+
+.update{
+    transform: translate(10px,20px);
+    
+}
+.delete{
+    transform: translate(500px,90px);
+    
+}
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    border-bottom: 1px solid #ddd;
+  }
+  th, td {
+    padding: 15px;
+    text-align: left;
+  }
+  tr:hover {background-color: #f5f5f5;}
+ /* tr:nth-child(even) {background-color: #f2f2f2;}*/

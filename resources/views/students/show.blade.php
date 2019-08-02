@@ -27,11 +27,13 @@
                         <li>{{ $teacher->teacherName }}</li>
                         @endforeach
                     </ul>
+                    <a href="{{ url('students') }}" class='float-right'>Back</a></div>
                     <form class="d-inline" action="{{ url('students' . '/' . $student->id) }}" method="post">
                         @method('DELETE')
                         @csrf
-                        <input type="submit"  value="Delete ">
+                        <input type="submit"  value="Confirm Delete ">
                     </form>
+                    
             </div>
         </div>
     </div>

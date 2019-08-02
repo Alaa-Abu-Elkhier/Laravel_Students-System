@@ -27,7 +27,8 @@ class StudentsController extends Controller
      */
     public function index()
     {
-     return view('students.all')->withStudents(Student::all());
+     $avg = Student::avg('degree');
+     return view('students.all')->withStudents(Student::all())->withAvg($avg);;
     }
 
 
@@ -79,10 +80,12 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Student $student) {
+        return view('students.edit', compact('student'));
     }
+   
+   
+
 
     /**
      * Update the specified resource in storage.
@@ -91,10 +94,13 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, Student $student) {
+        $student->name = $request->name;
+        $student->degree = $request->degree;
+        $student->save();
+        return redirect()->route('students.index');
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -105,6 +111,7 @@ class StudentsController extends Controller
     public function destroy(Student $student) {
 
         $student->delete();
+        
   
         return redirect('students');
       }
