@@ -1,15 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Api;
+use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
-use App\Student;
-use App\Course;
-use App\Teacher;
-
-class StudentsController extends Controller
+class StudentsApiController extends Controller
 {
-     /**
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -28,19 +25,9 @@ class StudentsController extends Controller
     public function index()
     {
      $avg = Student::avg('degree');
-     return view('students.all')->withStudents(Student::all())->withAvg($avg);
+     return response()->json(['Students' => Student::all()->withAvg($avg)]);
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-        return view('students.insert');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -55,7 +42,14 @@ class StudentsController extends Controller
         $teacher=Teacher::create(['teacherName'=>request('teacherName')]);
         $student->courses()->attach($course);
         $student->teachers()->attach($teacher);
-        return redirect('students');
+
+        return response()->json([
+         'Student'  =>  $student -> toArray(),
+         'Course'   =>  $course  -> toArray(),
+         'Teacher'  =>  $teacher -> toArray()
+         
+          
+        ]);
         
     }
 
@@ -68,9 +62,8 @@ class StudentsController extends Controller
     public function show(Student $student)
     
     {
-        
-
-        return view('students.show')->withStudent($student);
+      
+        return response()->json(['Student' => $student->toArray()]);
 
     }
 
@@ -81,7 +74,7 @@ class StudentsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Student $student) {
-        return view('students.edit', compact('student'));
+      return response()->json(['Student' => $student->toArray()]);
     }
    
    
@@ -98,7 +91,7 @@ class StudentsController extends Controller
         $student->name = $request->name;
         $student->degree = $request->degree;
         $student->save();
-        return redirect()->route('students.index');
+        return response()->json(['Student' => $student->toArray()]);
     }
     
 
@@ -111,8 +104,9 @@ class StudentsController extends Controller
     public function destroy(Student $student) {
 
         $student->delete();
-        
-  
-        return redirect('students');
+        return response()->json(['message'=>'Student successfully deleted']);
+      
       }
 }
+
+

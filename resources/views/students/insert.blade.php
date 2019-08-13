@@ -18,9 +18,10 @@
                     <input type="text" name="name" placeholder="Name">
                     <input type="text" name="degree"placeholder="Degree">
                     <input type="text" name="teacherName"placeholder="Teacher Name">
-                    <input type="checkbox" name="courseName" value="English"> English<br>
-                    <input type="checkbox" name="courseName" value="Math">Math<br>
-                    <input type="checkbox" name="courseName" value="Science" >Science<br>
+                    <br>
+                    <input type="radio" name="courseName" value="English"> English<br>
+                    <input type="radio" name="courseName" value="Math"> Math<br>
+                    <input type="radio" name="courseName" value="Science" > Science<br>
 
                     <input type="submit" name="send" value="send data">
                     </form>
